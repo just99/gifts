@@ -1,0 +1,24 @@
+<script>
+	
+	function delivered(uuid) {
+		var xhr = new XMLHttpRequest();
+		xhr.open('PUT', 'http://boomstarter.ru/api/v1.1/partners/gifts/'+uuid+'/delivery_state');
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4) {
+		    	var data = jQuery.parseJSON(this.responseText);
+		    	$('#tr-'+data.uuid).fadeOut();
+			}
+		};
+		xhr.send('{ "shop_uuid":"27bb3bf8-f7a2-49e9-8445-9d062c7d3871", "shop_token":"f9e3218e-4eb1-4c03-8e40-fa4b41a0a4b2", "delivery_state":"delivery" }');
+	}
+	
+	$(function() {
+		$('#gifts_tab input[name=data]').datepicker({
+			prevText:'',
+			nextText:'',
+			dateFormat:'yy-mm-dd'
+		});
+	});
+	
+</script>
